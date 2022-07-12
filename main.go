@@ -87,7 +87,7 @@ func handleRoutes() {
 
 	godotenv.Load()
 	port := os.Getenv("PORT")
-	log.Fatal(http.ListenAndServe(":"+port, router))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 func main() {
