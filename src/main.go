@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
 type Tasks struct {
@@ -82,11 +84,15 @@ func handleRoutes() {
 	router.HandleFunc("/create", createTask).Methods("POST")
 	router.HandleFunc("/delete/{id}", deleteTask).Methods("DELETE")
 	router.HandleFunc("/update/{id}", updateTask).Methods("PUT")
-	log.Fatal(http.ListenAndServe(":8082", router))
+
+	godotenv.Load()
+	port := os.Getenv("PORT")
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
 
 func main() {
 	allTasks()
 	// fmt.Println("Hello")
 	handleRoutes()
+
 }
