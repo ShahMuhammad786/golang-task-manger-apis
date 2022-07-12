@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -84,13 +83,12 @@ func handleRoutes() {
 	router.HandleFunc("/delete/{id}", deleteTask).Methods("DELETE")
 	router.HandleFunc("/update/{id}", updateTask).Methods("PUT")
 
-	port := os.Getenv("PORT")
-	log.Fatal(http.ListenAndServe(":"+port, router))
+	// port := os.Getenv("PORT")
+	log.Fatal(http.ListenAndServe(":8082", router))
 }
 
 func main() {
 	allTasks()
-	// fmt.Println("Hello")
 	handleRoutes()
 
 }
