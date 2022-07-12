@@ -3,10 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -85,19 +83,22 @@ func handleRoutes() {
 	router.HandleFunc("/delete/{id}", deleteTask).Methods("DELETE")
 	router.HandleFunc("/update/{id}", updateTask).Methods("PUT")
 
-	port := os.Getenv("PORT")
-	log.Fatal(http.ListenAndServe(":"+port, router))
+	log.Fatal(http.ListenAndServe(":8082", router))
+
+	// port := os.Getenv("PORT")
+	// log.Fatal(http.ListenAndServe(":"+port, router))
+
 }
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, "Hello Shah")
-}
+// func hello(w http.ResponseWriter, r *http.Request) {
+// 	io.WriteString(w, "Hello Shah")
+// }
 
 func main() {
-	// allTasks()
-	// handleRoutes()
+	allTasks()
+	handleRoutes()
 
-	port := os.Getenv("PORT")
-	http.HandleFunc("/", hello)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	// port := os.Getenv("PORT")
+	// http.HandleFunc("/", hello)
+	// log.Fatal(http.ListenAndServe(":"+port, nil))
 }
