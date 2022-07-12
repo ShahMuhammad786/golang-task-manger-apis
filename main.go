@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -88,8 +89,15 @@ func handleRoutes() {
 	log.Fatal(http.ListenAndServe(":"+port, router))
 }
 
-func main() {
-	allTasks()
-	handleRoutes()
+func hello(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "Hello Shah")
+}
 
+func main() {
+	// allTasks()
+	// handleRoutes()
+
+	port := os.Getenv("PORT")
+	http.HandleFunc("/", hello)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
