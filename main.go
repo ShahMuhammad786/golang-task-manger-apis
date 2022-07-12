@@ -85,7 +85,7 @@ func handleRoutes() {
 	router.HandleFunc("/update/{id}", updateTask).Methods("PUT")
 
 	port := os.Getenv("PORT")
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
 
 func main() {
