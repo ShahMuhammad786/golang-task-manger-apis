@@ -8,7 +8,6 @@ import (
 	"os"
 
 	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 )
 
 type Tasks struct {
@@ -85,7 +84,6 @@ func handleRoutes() {
 	router.HandleFunc("/delete/{id}", deleteTask).Methods("DELETE")
 	router.HandleFunc("/update/{id}", updateTask).Methods("PUT")
 
-	godotenv.Load()
 	port := os.Getenv("PORT")
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
